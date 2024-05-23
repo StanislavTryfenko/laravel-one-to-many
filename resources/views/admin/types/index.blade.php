@@ -1,14 +1,12 @@
-@extends('layouts.admin')
+@include('layouts.admin')
 
 @section('content')
-    <div class="bg-dark text-white p-4">
-        <div class="container">
-            <h1>Projects</h1>
-            <a class="btn btn-primary" href="{{ route('admin.projects.create') }}">New project</a>
-        </div>
+
+    <div class="container">
+        <h1>Types list</h1>
+        <a class="btn btn-primary" href="{{ route('admin.types.create') }}">New type</a>
     </div>
     <div class="container">
-
         @include('partials.session-messages')
 
         <div class="table-responsive">
@@ -16,49 +14,33 @@
                 <thead>
                     <tr>
                         <th scope="col">ID</th>
-                        <th scope="col">COVER IMAGE</th>
                         <th scope="col">NAME</th>
-                        <th scope="col">CATEGORY</th>
-                        <th scope="col">DESCRIPTION</th>
                         <th scope="col">ACTIONS</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($projects as $project)
+                    @forelse ($types as $type)
                         <tr class="">
-                            <td scope="row">{{ $project->id }}</td>
+                            <td scope="row">{{ $type->id }}</td>
+                            <td>{{ $type->name }}</td>
                             <td>
-                                @if (Str::startsWith($project->image, 'https://'))
-                                    <img width="140" loading="lazy" src="{{ $project->image }}"
-                                        alt="{{ $project->name }}">
-                                @else
-                                    <img width="140" loading="lazy" src="{{ asset('storage/' . $project->image) }}"
-                                        alt="{{ $project->name }}">
-                                @endif
-                            </td>
-                            <td>{{ $project->name }}</td>
-                            <td>{{ $project->type->name ?? 'No category' }}</td>
-                            <td>{{ $project->description }}</td>
-                            <td>
-                                <a class="btn btn-dark" href="{{ route('admin.projects.show', $project) }}">View</a>
-                                <a class="btn btn-primary" href="{{ route('admin.projects.edit', $project) }}">Edit</a>
-                                <!-- Modal trigger button -->
+                                <a class="btn btn-primary" href="{{ route('admin.types.edit', $type) }}">Edit</a>
                                 <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                    data-bs-target="#modalId-{{ $project->id }}">
+                                    data-bs-target="#modalId-{{ $type->id }}">
                                     Delete
                                 </button>
 
                                 <!-- Modal Body -->
                                 <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
-                                <div class="modal fade" id="modalId-{{ $project->id }}" tabindex="-1"
+                                <div class="modal fade" id="modalId-{{ $type->id }}" tabindex="-1"
                                     data-bs-backdrop="static" data-bs-keyboard="false" role="dialog"
-                                    aria-labelledby="modalTitleId-{{ $project->id }}" aria-hidden="true">
+                                    aria-labelledby="modalTitleId-{{ $type->id }}" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm"
                                         role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="modalTitleId-{{ $project->id }}">
-                                                    Attention! Deleting: {{ $project->name }}
+                                                <h5 class="modal-title" id="modalTitleId-{{ $type->id }}">
+                                                    Attention! Deleting: {{ $type->name }}
                                                 </h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                     aria-label="Close"></button>
@@ -71,7 +53,7 @@
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                                                     Close
                                                 </button>
-                                                <form action="{{ route('admin.projects.destroy', $project) }}"
+                                                <form action="{{ route('admin.types.destroy', $type) }}"
                                                     method="post">
                                                     @csrf
                                                     @method('DELETE')
@@ -88,13 +70,10 @@
                         </tr>
                     @empty
                         <tr class="">
-                            <td scope="row" colspan="5">No projects</td>
+                            <td scope="row" colspan="3">No types</td>
                         </tr>
                     @endforelse
                 </tbody>
             </table>
         </div>
-
-        {{ $projects->links('pagination::bootstrap-5') }}
     </div>
-@endsection
