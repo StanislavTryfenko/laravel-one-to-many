@@ -20,6 +20,21 @@
                 @enderror
             </div>
 
+            <div class="mb-3">
+                <label for="type_id" class="form-label">Type</label>
+                <select class="form-select @error('type_id') is-invalid @enderror" name="type_id" id="type_id">
+                    <option disabled selected>Select a type</option>
+                    @foreach ($types as $type)
+                        <option value="{{ $type->id }}" {{ old('type_id') == $type->id ? 'selected' : '' }}>
+                            {{ $type->name }}
+                        </option>
+                    @endforeach
+                </select>
+                @error('type_id')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+
             <div class="d-flex gap-2">
                 <img height="100" src="{{ old('image') }}" alt="">
                 <div class="mb-3 w-100">

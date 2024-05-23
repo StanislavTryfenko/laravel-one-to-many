@@ -18,7 +18,7 @@
                         <th scope="col">ID</th>
                         <th scope="col">COVER IMAGE</th>
                         <th scope="col">NAME</th>
-                        <th scope="col">SLUG</th>
+                        <th scope="col">CATEGORY</th>
                         <th scope="col">DESCRIPTION</th>
                         <th scope="col">ACTIONS</th>
                     </tr>
@@ -37,7 +37,7 @@
                                 @endif
                             </td>
                             <td>{{ $project->name }}</td>
-                            <td>{{ $project->slug }}</td>
+                            <td>{{ $project->type->name ?? 'No category' }}</td>
                             <td>{{ $project->description }}</td>
                             <td>
                                 <a class="btn btn-dark" href="{{ route('admin.projects.show', $project) }}">View</a>

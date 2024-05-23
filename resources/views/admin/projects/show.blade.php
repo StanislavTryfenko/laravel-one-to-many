@@ -55,6 +55,10 @@
                     alt="{{ $project->name }}">
             @endif
             <h2>{{ $project->name }}</h2>
+            <div class="metadata">
+                <strong>Type: </strong>
+                <span>{{ $project->type->name }}</span>
+            </div>
             <p>{{ $project->description }}</p>
     </section>
 @endsection
