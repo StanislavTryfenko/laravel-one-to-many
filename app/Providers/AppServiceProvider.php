@@ -4,8 +4,6 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
-use App\View\Components\DeleteButton;
-
 
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +21,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-       Blade::component('delete-button', DeleteButton::class);
+        Blade::component('components.delete-button', 'button-delete');
     }
 }

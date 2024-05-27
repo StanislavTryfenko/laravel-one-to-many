@@ -1,7 +1,6 @@
 @extends('layouts.admin')
 
 @section('content')
-
     <div class="bg-dark text-white p-4">
         <div class="container">
             <h1>Projects</h1>
@@ -44,6 +43,7 @@
                                 <a class="btn btn-dark" href="{{ route('admin.projects.show', $project) }}">View</a>
                                 <a class="btn btn-primary" href="{{ route('admin.projects.edit', $project) }}">Edit</a>
                                 <x-button-delete :id="$project->id" :name="$project->name" :route="route('admin.projects.destroy', $project)">
+                                </x-button-delete>
                             </td>
                         </tr>
                     @empty

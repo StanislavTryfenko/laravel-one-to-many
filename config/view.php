@@ -33,8 +33,4 @@ return [
         realpath(storage_path('framework/views'))
     ),
 
-    'components' => [
-        'button-delete' => 'components.delete-button',
-    ],
-
 ];
